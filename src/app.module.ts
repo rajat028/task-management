@@ -24,7 +24,7 @@ import { AppController } from './app.controller';
             type: 'postgres',
             url: databaseUrl,
             autoLoadEntities: true,
-            synchronize: process.env.NODE_ENV !== 'production',
+            synchronize: process.env.DB_SYNC === 'true' || process.env.NODE_ENV !== 'production',
             ssl:
               process.env.NODE_ENV === 'production'
                 ? { rejectUnauthorized: false }
@@ -41,7 +41,7 @@ import { AppController } from './app.controller';
           password: configService.get<string>('DB_PASSWORD'),
           database: configService.get<string>('DB_DATABASE'),
           autoLoadEntities: true,
-          synchronize: process.env.NODE_ENV !== 'production',
+          synchronize: process.env.DB_SYNC === 'true' || process.env.NODE_ENV !== 'production',
           ssl:
             process.env.NODE_ENV === 'production'
               ? { rejectUnauthorized: false }
